@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Halloween Game.sln"
+    "dotnet.defaultSolution": "Halloween-Game.sln"
 }

@@ -6,28 +6,44 @@ using UnityEditor.Timeline.Actions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
+/* TODO:
+ - Add camera movement
+*/
+
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed =10f;
-    private CharacterController cc;
-    public Animator cam;
-    public int maxHealth = 3;
-    public Slider staminaBar;
-
-    private Vector3 inputVector;
+    public float moveSpeed = 10f;
+    private Vector3 movement;
     private Vector3 movementVector;
-    private float grav = -10f;
-    private float damping = 5f;
+    private bool isMoving;
+
+    public float sprintFactor = 1.5f;
+    public Slider staminaBar;
+    private bool canRun;
+
+    public GameObject cam;
+    public float cameraSensitivity = 1f;
+    private Vector2 lookAngles;
+
+    private Animator cameraAnimator;
+
     private int health;
+    public int maxHealth = 3;
+
+    private float damping = 5f;
 
     private int meter = 500;
-    private bool isWalking;
-    private bool run;
-    
+
+    private InputActions input;
+
     void Awake()
     {
-        cc = GetComponent<CharacterController>();
+        input = new();
+
+        cameraAnimator = cam.GetComponent<Animator>();
         Cursor.lockState = CursorLockMode.Locked;
         health = maxHealth;
         staminaBar.maxValue = 499;
@@ -38,58 +54,71 @@ public class PlayerController : MonoBehaviour
         UIManager.Instance.UpdateHealth(health);
     }
 
+    private void OnEnable()
+    {
+        input.Enable();
+    }
+    private void OnDisable()
+    {
+        input.Disable();
+    }
+
     void Update()
     {
+        // Set whether player can run
         if (meter >= 499)
         {
             meter = 499;
-            run = true;
+            canRun = true;
         }
         if (meter <= 0)
         {
             meter = 0;
-            run = false;
+            canRun = false;
         }
         staminaBar.value = meter;
-        GetInput();
-        MovePlayer();
-        cam.SetBool("isWalking", isWalking);
-    }
-    void GetInput()
-    {
-        if (Input.GetKey(KeyCode.W) ||
-            Input.GetKey(KeyCode.A) ||
-            Input.GetKey(KeyCode.S) ||
-            Input.GetKey(KeyCode.D)
 
-            )
+        Move();
+        cameraAnimator.SetBool("isWalking", isMoving);
+    }
+
+    void Move()
+    {
+        // Translational movement
+        movement = input.Player.Movement.ReadValue<Vector2>();
+        if (movement.magnitude != 0)
         {
-            inputVector = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
-            inputVector.Normalize();
-            inputVector = transform.TransformDirection(inputVector);
-            isWalking = true;
+            movement = new Vector3(
+                movement.x,
+                0,
+                movement.y
+            );
+            movementVector = movement.normalized * moveSpeed * Time.deltaTime;
+            isMoving = true;
         }
         else
         {
-            inputVector = Vector3.Lerp(inputVector, Vector3.zero, damping * Time.deltaTime);
-            isWalking= false;
+            movementVector = Vector3.Lerp(movementVector, Vector3.zero, damping * Time.deltaTime);
+            isMoving = false;
         }
-        movementVector = (inputVector * moveSpeed) + (Vector3.up * grav);
-    }
-    void MovePlayer()
-    {
-        if (Input.GetKey(KeyCode.Space) && meter != 0 && run)
+
+        if (Input.GetKey(KeyCode.Space) && meter != 0 && canRun && isMoving)
         {
-            cc.Move(1.5f * movementVector * Time.deltaTime);
+            transform.Translate(sprintFactor * movementVector);
             meter -= 2;
             Debug.Log("Am Sprinting!");
         }
         else
         {
-            cc.Move(movementVector * Time.deltaTime);
+            transform.Translate(movementVector);
             meter += 1;
         }
+
+        // Rotational movement
+        lookAngles += input.Player.MouseDelta.ReadValue<Vector2>() * cameraSensitivity * Time.deltaTime;
+        transform.rotation = Quaternion.Euler(0, lookAngles.x, 0);
     }
+
     public void DamagePlayer()
     {
         health--;

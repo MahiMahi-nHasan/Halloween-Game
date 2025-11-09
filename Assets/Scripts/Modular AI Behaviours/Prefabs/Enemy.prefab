@@ -166,6 +166,9 @@ MonoBehaviour:
   - trigger: {fileID: 11400000, guid: bcf3848c1248d4df0829595aad565ed6, type: 2}
     constraints:
     - {fileID: 11400000, guid: 66489eb4c13ef40e1b307a59e04dc260, type: 2}
+  - trigger: {fileID: 11400000, guid: bcf3848c1248d4df0829595aad565ed6, type: 2}
+    constraints:
+    - {fileID: 11400000, guid: 87c6332f2c9be4eed9f80b817f02b898, type: 2}
   - trigger: {fileID: 11400000, guid: f6ddd9f7f04c3a34a80e169aadceb5aa, type: 2}
     constraints:
     - {fileID: 11400000, guid: f4bcda99bebb141499ef26da63d45763, type: 2}
@@ -212,9 +215,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 1
+  m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!54 &2822948018494702447
 Rigidbody:
   m_ObjectHideFlags: 0

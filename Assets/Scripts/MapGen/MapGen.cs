@@ -90,8 +90,9 @@ public class MapGen : MonoBehaviour
         float nodeSize = 1;
         gg.center = new Vector3(100, 0, 100);
         gg.SetDimensions(width, depth, nodeSize);
-        gg.collision.use2D = false; 
-        gg.collision.type = ColliderType.Ray; 
+        gg.erodeIterations = 1;
+        gg.collision.use2D = false;
+        gg.collision.type = ColliderType.Capsule;
         gg.collision.mask = LayerMask.GetMask("Obstacles");
         AstarPath.active.Scan();
 
