@@ -193,7 +193,7 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 128
-  nextWaypointDistance: 3
+  nextWaypointDistance: 1.5
   drawGizmos: 0
 --- !u!136 &4432252774701236749
 CapsuleCollider:

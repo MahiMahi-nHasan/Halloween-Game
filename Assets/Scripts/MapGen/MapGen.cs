@@ -95,7 +95,6 @@ public class MapGen : MonoBehaviour
         gg.collision.type = ColliderType.Capsule;
         gg.collision.mask = LayerMask.GetMask("Obstacles");
         AstarPath.active.Scan();
-
     }
 
     private Tile SelectRandomTileForPosition(int x, int z)

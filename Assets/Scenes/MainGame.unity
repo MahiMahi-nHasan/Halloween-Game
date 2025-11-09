@@ -739,10 +739,6 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1259568083}
-    - target: {fileID: 4667747518212396291, guid: f9eebadef97c2144898ef9aa5cfb3f08, type: 3}
-      propertyPath: nextWaypointDistance
-      value: 1.5
-      objectReference: {fileID: 0}
     - target: {fileID: 7514395164830058123, guid: f9eebadef97c2144898ef9aa5cfb3f08, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1
@@ -879,7 +875,7 @@ MonoBehaviour:
   sprintFactor: 1.5
   staminaBar: {fileID: 1769852996}
   cam: {fileID: 1408392716}
-  cameraSensitivity: 100
+  cameraSensitivity: 300
   maxHealth: 3
 --- !u!54 &1259568086
 Rigidbody:
