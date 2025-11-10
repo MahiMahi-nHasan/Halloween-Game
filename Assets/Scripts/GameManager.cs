@@ -42,8 +42,6 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        UIManager.Instance.UpdateCandy(candy);
-        
         if (restockTimer == 0)
             foreach (GameObject spawn in candySpawnLocations)
                 spawn.GetComponent<ItemSpawnpoint>().Spawn();
