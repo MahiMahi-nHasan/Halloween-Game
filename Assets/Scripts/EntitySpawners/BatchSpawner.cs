@@ -15,15 +15,21 @@ public class BatchSpawner : EntitySpawner
         if (prefab == null) return;
         if (locations == null || locations.Length == 0) return;
 
+        void Spawn(Vector3 pos)
+        {
+            GameObject go = Object.Instantiate(prefab, pos, Quaternion.identity);
+            int id = go.GetInstanceID();
+            go.name = id.ToString();
+            go.GetComponent<NPC>().parent = this;
+            spawnedEntities.Add(id, go);
+        }
+
         if (mode == SpawnMode.FIXED)
         {
             for (int i = 0; i < count; i++)
             {
                 Vector3 pos = locations[Random.Range(0, locations.Length)];
-                GameObject go = Object.Instantiate(prefab, pos, Quaternion.identity);
-                int id = go.GetInstanceID();
-                if (!spawnedEntities.ContainsKey(id))
-                    spawnedEntities.Add(id, go);
+                Spawn(pos);
             }
         }
         else // PER
@@ -33,10 +39,7 @@ public class BatchSpawner : EntitySpawner
                 Vector3 loc = locations[j];
                 for (int i = 0; i < count; i++)
                 {
-                    GameObject go = Object.Instantiate(prefab, loc, Quaternion.identity);
-                    int id = go.GetInstanceID();
-                    if (!spawnedEntities.ContainsKey(id))
-                        spawnedEntities.Add(id, go);
+                    Spawn(loc);
                 }
             }
         }

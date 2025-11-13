@@ -751,71 +751,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1135327220}
   m_CullTransparentMesh: 1
---- !u!1001 &1169660877
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2116179474185437008, guid: f9eebadef97c2144898ef9aa5cfb3f08, type: 3}
-      propertyPath: m_Name
-      value: Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 4345718593345675167, guid: f9eebadef97c2144898ef9aa5cfb3f08, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 4345718593345675167, guid: f9eebadef97c2144898ef9aa5cfb3f08, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4345718593345675167, guid: f9eebadef97c2144898ef9aa5cfb3f08, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 4345718593345675167, guid: f9eebadef97c2144898ef9aa5cfb3f08, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4345718593345675167, guid: f9eebadef97c2144898ef9aa5cfb3f08, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4345718593345675167, guid: f9eebadef97c2144898ef9aa5cfb3f08, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4345718593345675167, guid: f9eebadef97c2144898ef9aa5cfb3f08, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4345718593345675167, guid: f9eebadef97c2144898ef9aa5cfb3f08, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4345718593345675167, guid: f9eebadef97c2144898ef9aa5cfb3f08, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4345718593345675167, guid: f9eebadef97c2144898ef9aa5cfb3f08, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4667747518212396291, guid: f9eebadef97c2144898ef9aa5cfb3f08, type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 1259568083}
-    - target: {fileID: 7514395164830058123, guid: f9eebadef97c2144898ef9aa5cfb3f08, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f9eebadef97c2144898ef9aa5cfb3f08, type: 3}
 --- !u!1 &1232491769
 GameObject:
   m_ObjectHideFlags: 0
@@ -825,7 +760,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1232491770}
-  - component: {fileID: 1232491772}
   - component: {fileID: 1232491771}
   m_Layer: 6
   m_Name: CandyThrower
@@ -843,7 +777,7 @@ Transform:
   m_GameObject: {fileID: 1232491769}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1.466, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -861,35 +795,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb5458532d011341900faecb6f6a6ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 20
-  verticalRange: 20
-  enemyManager: {fileID: 1488623832}
-  gameManager: {fileID: 1488623833}
+  candyPrefab: {fileID: 2985842136572694376, guid: dd2fd68a95e8a4b72b086e06f0609db4, type: 3}
+  forceMultiplier: 5
+  baseDirection: {x: 0, y: 0.1, z: 1}
+  randomizationFactor: 45
+  count: 5
   fireRate: 1.5
-  raycastLayerMask:
-    serializedVersion: 2
-    m_Bits: 129
---- !u!65 &1232491772
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1232491769}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1259568079
 GameObject:
   m_ObjectHideFlags: 0
@@ -1345,13 +1256,13 @@ MonoBehaviour:
   cashierSpawner:
     locations: []
     continuous: 0
-    mode: 0
-    prefab: {fileID: 0}
+    mode: 1
+    prefab: {fileID: 6248843324610631597, guid: 8573fe6699ad8c245961240d667f9acf, type: 3}
     count: 1
   floorClerkSpawner:
     locations: []
     continuous: 0
-    prefab: {fileID: 0}
+    prefab: {fileID: 2116179474185437008, guid: f9eebadef97c2144898ef9aa5cfb3f08, type: 3}
     chance: 0.1
     max: 5
 --- !u!1 &1490056527
@@ -1879,6 +1790,5 @@ SceneRoots:
   - {fileID: 1002582628}
   - {fileID: 1941167943}
   - {fileID: 601067999}
-  - {fileID: 1169660877}
   - {fileID: 1287692740}
   - {fileID: 265723458}

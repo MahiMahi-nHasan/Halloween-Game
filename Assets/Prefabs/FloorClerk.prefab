@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 4432252774701236749}
   - component: {fileID: 2822948018494702447}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: FloorClerk
   m_TagString: Hostile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -162,13 +162,10 @@ MonoBehaviour:
   triggers:
   - trigger: {fileID: 11400000, guid: 6eadac49f013b4a11b9fba070d3fa5e2, type: 2}
     constraints:
-    - {fileID: 11400000, guid: 27b05513f6ded4df88c53dbe50f206c9, type: 2}
+    - {fileID: 11400000, guid: a28c76ff3f9cd4f1faff7c79536852e1, type: 2}
   - trigger: {fileID: 11400000, guid: bcf3848c1248d4df0829595aad565ed6, type: 2}
     constraints:
     - {fileID: 11400000, guid: 66489eb4c13ef40e1b307a59e04dc260, type: 2}
-  - trigger: {fileID: 11400000, guid: bcf3848c1248d4df0829595aad565ed6, type: 2}
-    constraints:
-    - {fileID: 11400000, guid: 87c6332f2c9be4eed9f80b817f02b898, type: 2}
   - trigger: {fileID: 11400000, guid: f6ddd9f7f04c3a34a80e169aadceb5aa, type: 2}
     constraints:
     - {fileID: 11400000, guid: f4bcda99bebb141499ef26da63d45763, type: 2}
@@ -185,7 +182,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 90607a51da03e4349870c5b51dc45632, type: 2}
   - behaviour: {fileID: 11400000, guid: 6e0c9833042f24b06977c334035a01cf, type: 2}
     constraints: []
-  target: {fileID: 0}
+  targetTag: Player
   health: 100
   speed: 5
   height: 1

@@ -20,6 +20,7 @@ public class CappedRandomSpawner : EntitySpawner
             Vector3 pos = locations[Random.Range(0, locations.Length)];
             GameObject go = Object.Instantiate(prefab, pos, Quaternion.identity);
             int id = go.GetInstanceID();
+            go.name = id.ToString();
             if (!spawnedEntities.ContainsKey(id))
                 spawnedEntities.Add(id, go);
         }

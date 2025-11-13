@@ -15,9 +15,9 @@ TagManager:
   - 
   - Water
   - UI
-  - Shoot
+  - Projectile
   - Obstacles
-  - 
+  - IgnoreProjectiles
   - 
   - 
   - 

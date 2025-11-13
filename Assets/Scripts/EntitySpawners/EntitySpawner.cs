@@ -7,4 +7,9 @@ public abstract class EntitySpawner
     protected Dictionary<int, GameObject> spawnedEntities = new Dictionary<int, GameObject>();
     public bool continuous;
     public abstract void TrySpawn();
+    public void Despawn(int id)
+    {
+        spawnedEntities.Remove(id);
+        Object.Destroy(GameObject.Find(id.ToString()));
+    }
 }

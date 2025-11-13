@@ -20,7 +20,8 @@ public class NPC : MonoBehaviour
 
     [Header("NPC")]
 
-    [SerializeField] private Transform target;
+    [SerializeField] private string targetTag;
+    private Transform target;
     public Transform _Target
     {
         get { return target; }
@@ -67,9 +68,9 @@ public class NPC : MonoBehaviour
         set { sawCandyStolen = value; }
     }
 
-
     private Seeker seeker;
     private Path path;
+    [HideInInspector] public EntitySpawner parent;
 
     private int currentWaypoint = 0;
     [SerializeField] private float nextWaypointDistance = 3;
@@ -80,7 +81,9 @@ public class NPC : MonoBehaviour
     {
         seeker = GetComponent<Seeker>();
         if (target == null)
-            target = GameObject.FindObjectOfType<PlayerController>().transform;
+            target = FindObjectOfType<PlayerController>().transform;
+
+        target = GameObject.FindGameObjectWithTag(targetTag).transform;
     }
 
     private void OnEnable()
@@ -158,7 +161,7 @@ public class NPC : MonoBehaviour
         foreach (ConstrainedTrigger t in triggers)
             if (Constraint.Evaluate(t.constraints))
                 t.trigger.Invoke();
-        
+
         // Check whether behaviour has changed
         activeBehaviour = GetActiveBehaviour();
 
@@ -261,14 +264,36 @@ public class NPC : MonoBehaviour
         if (0 <= activeBehaviour && activeBehaviour < movementBehaviours.Length)
             movementBehaviours[activeBehaviour].behaviour.Gizmos();
     }
-    public void takeDamage(float damage)
-    {
-        health -= damage;
-    }
+
     private void Attack()
     {
         target.GetComponent<PlayerController>().DamagePlayer();
         cooldown = 2f;
+    }
+
+    private IEnumerator OnSleep()
+    {
+        // Disable NPC movement
+        enabled = false;
+
+        // Despawn NPC
+        Despawn();
+
+        yield break;
+    }
+
+    private void Despawn()
+    {
+        if (parent != null)
+            parent.Despawn(GetInstanceID());
+        else
+            Destroy(gameObject);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == GameManager.active.projectileLayer)
+            OnSleep();
     }
 }
 

@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Game Variables")]
     public LayerMask obstacleLayers;
+    public LayerMask projectileLayer;
     public float restockInterval = 30f;
     public string candySpawnTag = "candySpawnpoint";
     public string floorClerkSpawnTag = "fcSpawnpoint";
@@ -76,7 +77,10 @@ public class GameManager : MonoBehaviour
         restockTimer += Time.deltaTime;
         if (restockTimer > restockInterval)
             restockTimer = 0;
+    }
 
+    void FixedUpdate()
+    {
         if (floorClerkSpawner.continuous)
             floorClerkSpawner.TrySpawn();
     }
