@@ -59,13 +59,10 @@ public class ItemPickup : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, 20f); // 20 units radius
         foreach (var col in hitColliders)
         {
-            NPC npc;
-            col.TryGetComponent<NPC>(out npc);
+            if (!col.TryGetComponent(out NPC npc)) return;
 
-            if (npc != null && !Physics.Raycast(transform.position, col.transform.position - transform.position, Vector3.Distance(transform.position, col.transform.position), GameManager.active.obstacleLayers))
-            {
+            if (!Physics.Raycast(transform.position, col.transform.position - transform.position, Vector3.Distance(transform.position, col.transform.position), GameManager.active.obstacleLayers))
                 npc._SawCandyStolen = true;
-            }
         }
 
         // Destroy or disable the item
