@@ -68,6 +68,8 @@ public class NPC : MonoBehaviour
         set { sawCandyStolen = value; }
     }
 
+    private bool followingCommand = false;
+
     private Seeker seeker;
     private Path path;
     [HideInInspector] public EntitySpawner parent;
@@ -269,7 +271,7 @@ public class NPC : MonoBehaviour
     private void Attack()
     {
         target.GetComponent<PlayerController>().DamagePlayer();
-        cooldown = 2f;
+        cooldown = attackTime;
     }
 
     private IEnumerator OnSleep()
@@ -283,6 +285,7 @@ public class NPC : MonoBehaviour
 
         yield break;
     }
+
     public void Sleep()
     {
         Debug.Log("Sleeping");
@@ -301,6 +304,11 @@ public class NPC : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals(GameManager.active.projectileTag))
             Sleep();
+    }
+
+    public void ReceiveCommand()
+    {
+        
     }
 }
 

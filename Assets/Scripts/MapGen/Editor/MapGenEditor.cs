@@ -11,8 +11,8 @@ public class MapGenEditor : Editor
     {
         MapGen mapGenerator = (MapGen)target;
         EditorGUILayout.LabelField("Map Dimensions", EditorStyles.boldLabel);
-        mapGenerator.startDimensions = EditorGUILayout.Vector2IntField("Starting Dimensions", mapGenerator.startDimensions);
-        mapGenerator.additionalDimensions = EditorGUILayout.Vector2IntField("Additional Dimensions", mapGenerator.additionalDimensions);
+        mapGenerator.totalDimensions = EditorGUILayout.Vector2IntField("Dimensions", mapGenerator.totalDimensions);
+        mapGenerator.offset = EditorGUILayout.Vector3Field("Offset", mapGenerator.offset);
         mapGenerator.spacing = EditorGUILayout.FloatField("Spacing", mapGenerator.spacing);
 
         EditorGUILayout.Space();
@@ -32,16 +32,15 @@ public class MapGenEditor : Editor
             EditorGUILayout.LabelField($"Tile {i + 1}", EditorStyles.boldLabel);
 
             mapGenerator.tiles[i].prefab = (GameObject)EditorGUILayout.ObjectField("Prefab", mapGenerator.tiles[i].prefab, typeof(GameObject), false);
-            int totalMapSize = (mapGenerator.startDimensions.x + mapGenerator.additionalDimensions.x)
-                             * (mapGenerator.startDimensions.y + mapGenerator.additionalDimensions.y);
+            int totalMapSize = mapGenerator.totalDimensions.x * mapGenerator.totalDimensions.y;
             if (mapGenerator.tiles[i].constraints == null || mapGenerator.tiles[i].constraints.Length != totalMapSize)
             {
                 mapGenerator.tiles[i].constraints = new bool[totalMapSize];
             }
 
             EditorGUILayout.LabelField("Constraints (allowed spawn positions):");
-            int width = mapGenerator.startDimensions.x + mapGenerator.additionalDimensions.x;
-            int height = mapGenerator.startDimensions.y + mapGenerator.additionalDimensions.y;
+            int width = mapGenerator.totalDimensions.x;
+            int height = mapGenerator.totalDimensions.y;
 
             for (int y = height - 1; y >= 0; y--)
             {
@@ -76,8 +75,8 @@ public class MapGenEditor : Editor
 
         if (mapGenerator.chunks != null && mapGenerator.chunks.Length > 0)
         {
-            int width = mapGenerator.startDimensions.x + mapGenerator.additionalDimensions.x;
-            int height = mapGenerator.startDimensions.y + mapGenerator.additionalDimensions.y;
+            int width = mapGenerator.totalDimensions.x;
+            int height = mapGenerator.totalDimensions.y;
 
             for (int y = height - 1; y >= 0; y--)
             {

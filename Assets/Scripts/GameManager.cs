@@ -71,8 +71,14 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (restockTimer == 0)
+        {
             foreach (GameObject spawn in candySpawnLocations)
                 spawn.GetComponent<ItemSpawnpoint>().Spawn();
+            foreach (GameObject npc in floorClerkSpawner.GetAllSpawnedEntities())
+                npc.GetComponent<NPC>()._SawCandyStolen = false;
+            foreach (GameObject npc in cashierSpawner.GetAllSpawnedEntities())
+                npc.GetComponent<NPC>()._SawCandyStolen = false;
+        }
 
         restockTimer += Time.deltaTime;
         if (restockTimer > restockInterval)

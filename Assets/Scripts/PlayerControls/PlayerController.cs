@@ -32,7 +32,8 @@ public class PlayerController : MonoBehaviour
 
     private float damping = 5f;
 
-    private int meter = 500;
+    private int meter;
+    public int maxStamina = 500;
 
     private InputActions input;
 
@@ -43,9 +44,11 @@ public class PlayerController : MonoBehaviour
         cameraAnimator = cam.GetComponent<Animator>();
         Cursor.lockState = CursorLockMode.Locked;
         health = maxHealth;
-        staminaBar.maxValue = 499;
+        staminaBar.maxValue = maxStamina;
+        meter = maxStamina;
         staminaBar.value = meter;
     }
+    
     private void Start()
     {
         UIManager.Instance.UpdateHealth(health);
@@ -63,9 +66,9 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // Set whether player can run
-        if (meter >= 499)
+        if (meter >= maxStamina)
         {
-            meter = 499;
+            meter = maxStamina;
             canRun = true;
         }
         if (meter <= 0)
@@ -78,6 +81,19 @@ public class PlayerController : MonoBehaviour
         Move();
         Look();
         cameraAnimator.SetBool("isWalking", isMoving);
+    }
+
+    void FixedUpdate()
+    {
+        if (Input.GetKey(KeyCode.Space) && meter != 0 && canRun && isMoving)
+        {
+            meter -= 2;
+            Debug.Log("Am Sprinting!");
+        }
+        else
+        {
+            meter += 1;
+        }
     }
 
     void Move()
@@ -102,14 +118,13 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space) && meter != 0 && canRun && isMoving)
         {
+            if (Physics.Raycast(transform.position, movementVector.normalized, movementVector.magnitude * sprintFactor, GameManager.active.obstacleLayers)) return;
             transform.Translate(sprintFactor * movementVector);
-            meter -= 2;
-            Debug.Log("Am Sprinting!");
         }
         else
         {
+            if (Physics.Raycast(transform.position, movementVector.normalized, movementVector.magnitude, GameManager.active.obstacleLayers)) return;
             transform.Translate(movementVector);
-            meter += 1;
         }
     }
 

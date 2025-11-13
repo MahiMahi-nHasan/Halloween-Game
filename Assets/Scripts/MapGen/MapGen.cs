@@ -16,18 +16,12 @@ public class MapGen : MonoBehaviour
     public GameObject[] chunks;
 
     [Header("Map Dimensions")]
-    public Vector2Int startDimensions = new Vector2Int(3, 3);
-    public Vector2Int additionalDimensions = new Vector2Int(2, 2);
+    public Vector2Int totalDimensions = new Vector2Int(3, 3);
+    public Vector3 offset;
 
-    private Vector2Int totalDimensions;
-
-    void Awake()
-    {
-        totalDimensions = startDimensions + additionalDimensions;
-    }
     public void getDimensions()
     {
-        totalDimensions = startDimensions + additionalDimensions;
+        totalDimensions = totalDimensions;
     }
 
     public GameObject[] GenerateMap()
@@ -56,7 +50,9 @@ public class MapGen : MonoBehaviour
             }
         }
 
-        createAStarGraph();
+        environmentParent.transform.position += offset;
+
+        StartCoroutine(createAStarGraph());
         return chunks;
     }
     public void DeleteMap()
@@ -81,8 +77,10 @@ public class MapGen : MonoBehaviour
         chunks = new GameObject[0];
     }
 
-    private void createAStarGraph()
+    private IEnumerator createAStarGraph()
     {
+        yield return new WaitForEndOfFrame();
+        
         AstarData data = AstarPath.active.data;
         GridGraph gg = data.AddGraph(typeof(GridGraph)) as GridGraph;
         int width = 250;

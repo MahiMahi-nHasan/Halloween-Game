@@ -13,4 +13,9 @@ public abstract class EntitySpawner
         spawnedEntities.Remove(id);
         Object.Destroy(GameObject.Find(id.ToString()));
     }
+
+    public GameObject[] GetAllSpawnedEntities()
+    {
+        return new List<GameObject>(spawnedEntities.Values).ToArray();
+    }
 }
