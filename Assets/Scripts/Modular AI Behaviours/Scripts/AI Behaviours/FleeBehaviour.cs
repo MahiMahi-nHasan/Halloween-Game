@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Flee Behaviour", menuName = "AI Behaviours/Behaviours/New Flee Behaviour")]
+[System.Serializable]
 public class FleeBehaviour : AIBehaviour
 {
     private Transform target;

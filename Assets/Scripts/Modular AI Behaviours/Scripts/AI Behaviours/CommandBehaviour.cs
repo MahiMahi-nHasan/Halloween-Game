@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Command Behaviour", menuName = "AI Behaviours/Behaviours/New Command Behaviour")]
+[System.Serializable]
 public class CommandBehaviour : AIBehaviour
 {
     public override Vector3 SelectTarget()

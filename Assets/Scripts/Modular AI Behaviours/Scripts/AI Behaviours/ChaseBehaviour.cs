@@ -1,9 +1,9 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName="Chase Behaviour", menuName="AI Behaviours/Behaviours/New Chase Behaviour")]
+[System.Serializable]
 public class ChaseBehaviour : AIBehaviour
 {
-    public string targetTag = "Player";
+    public string targetPropertyName = "_Target";
     public string sightPropertyName = "_SeeingTarget";
 
     private Vector3 lastKnownPosition;

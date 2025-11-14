@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bfaecd371d334cd7b2e7e9795a674e0, type: 3}
   m_Name: cashier
   m_EditorClassIdentifier: 
-  minimumInterval: 1000
+  minimumInterval: 0
   randomInterval: 0
   continuous: 0
   speedModifier: 0
-  multiplicativeSpeedMultiplier: 0
-  patrolRadius: 0
+  multiplicativeSpeedMultiplier: 1
+  patrolRadius: 10
   drawPatrolRadius: 0

@@ -1,6 +1,7 @@
 using System.Collections;
 using Pathfinding;
 using UnityEngine;
+using UnityEditor;
 
 [RequireComponent(typeof(Seeker))]
 [AddComponentMenu("AI Behaviours/NPC")]
@@ -22,10 +23,10 @@ public class NPC : MonoBehaviour
 
     [Header("Behaviours")]
 
-    [SerializeField] private ConstrainedTrigger[] triggers;
+    public ConstrainedTrigger[] triggers;
 
     [Tooltip("Order these in descending order of priority. The first behaviour that fits the constraints will be chosen for pathfinding.")]
-    [SerializeField] private Behaviour[] movementBehaviours;
+    public Behaviour[] behaviours;
 
     private int activeBehaviour = -1;
     private int checkActiveBehaviour = -1;
@@ -178,9 +179,7 @@ public class NPC : MonoBehaviour
 
         // Invoke all applicable triggers
         foreach (ConstrainedTrigger t in triggers)
-        {
-            bool eval;
-            if (eval = Constraint.Evaluate(t.constraints, debugLevel >= DebugLevel.EVERYTHING))
+            if (Constraint.Evaluate(t.constraints))
                 t.trigger.Invoke();
             if (debugLevel >= DebugLevel.EVERYTHING) Log(string.Format("{0} evaluated as {1}", t.trigger.name, eval));
         }
@@ -191,19 +190,19 @@ public class NPC : MonoBehaviour
         // Return early if no behaviour is selected
         if (activeBehaviour == -1)
         {
-            if (debugLevel >= DebugLevel.MESSAGES) Log("No AI behaviour - selecting a behaviour");
+            //Debug.Log("No AI behaviour - selecting a behaviour");
             return;
         }
 
         // Generate new path if AI Behaviour changed
         if (activeBehaviour != checkActiveBehaviour)
         {
-            if (debugLevel >= DebugLevel.VERBOSE) Log("New AI behaviour - generating new path");
+            //Debug.Log("New AI behaviour - generating new path");
             checkActiveBehaviour = activeBehaviour;
             StartCoroutine(StartPath());
         }
 
-        AIBehaviour active = movementBehaviours[activeBehaviour].behaviour;
+        AIBehaviour active = behaviours[activeBehaviour].behaviour;
 
         timer += Time.deltaTime;
         // Request new path after an interval if defined by behaviour, do not erase previous path during generation
@@ -218,13 +217,12 @@ public class NPC : MonoBehaviour
         {
             Vector3 dir = (path.vectorPath[currentWaypoint] - transform.position).normalized;
             Vector3 movement = (speed + active.speedModifier) * active.multiplicativeSpeedMultiplier * Time.deltaTime * dir;
-            if (debugLevel >= DebugLevel.VERBOSE)
-                Log(string.Format(
-                    "Waypoint {0} = {1}\nMovement vector = {2}",
-                    currentWaypoint,
-                    path.vectorPath[currentWaypoint],
-                    movement
-                ));
+            /*Debug.Log(string.Format(
+                "Waypoint {0} = {1}\nMovement vector = {2}",
+                currentWaypoint,
+                path.vectorPath[currentWaypoint],
+                movement
+            ));*/
             transform.Translate(movement);
 
             // Complete all waypoints which are close enough
@@ -236,7 +234,7 @@ public class NPC : MonoBehaviour
                         currentWaypoint++;
                     else
                     {
-                        if (debugLevel >= DebugLevel.VERBOSE) Log("Finished path - generating new path");
+                        //Debug.Log("Finished path - generating new path");
                         StartCoroutine(StartPath());
                         break;
                     }
@@ -251,8 +249,8 @@ public class NPC : MonoBehaviour
 
     private int GetActiveBehaviour()
     {
-        for (int i = 0; i < movementBehaviours.Length; i++)
-            if (Constraint.Evaluate(movementBehaviours[i].constraints))
+        for (int i = 0; i < behaviours.Length; i++)
+            if (Constraint.Evaluate(behaviours[i].constraints))
                 return i;  // Stop loop when the first viable AI behaviour is found
 
         return -1;
@@ -265,7 +263,7 @@ public class NPC : MonoBehaviour
 
         if (activeBehaviour != -1)
         {
-            AIBehaviour active = movementBehaviours[activeBehaviour].behaviour;
+            AIBehaviour active = behaviours[activeBehaviour].behaviour;
             // Get target and path to target
             Vector3 targetPosition = active.SelectTarget();
             yield return new WaitForSeconds(active.minimumInterval + (float)(rand.NextDouble() * active.randomInterval));
@@ -285,8 +283,8 @@ public class NPC : MonoBehaviour
     {
         if (!Application.isPlaying || !drawGizmos) return;
 
-        if (0 <= activeBehaviour && activeBehaviour < movementBehaviours.Length)
-            movementBehaviours[activeBehaviour].behaviour.Gizmos();
+        if (0 <= activeBehaviour && activeBehaviour < behaviours.Length)
+            behaviours[activeBehaviour].behaviour.Gizmos();
     }
 
     private void Attack()
@@ -297,6 +295,7 @@ public class NPC : MonoBehaviour
 
     private IEnumerator OnSleep()
     {
+        Debug.Log("Sleeping");
         // Disable movement
         speed = 0;
 
@@ -311,7 +310,7 @@ public class NPC : MonoBehaviour
 
     public void Sleep()
     {
-        if (debugLevel > DebugLevel.NONE) Log("Sleeping");
+        Debug.Log("Sleeping");
         StartCoroutine(OnSleep());
     }
 
@@ -337,14 +336,9 @@ public class NPC : MonoBehaviour
 
     public void SendRandomCommand()
     {
-        if (debugLevel > DebugLevel.NONE) Log("Sending Command");
+        Debug.Log("Sending Command");
         GameObject[] temp;
         (temp = GameManager.active.floorClerkSpawner.GetAllSpawnedEntities())[Random.Range(0, temp.Length - 1)].GetComponent<NPC>().ReceiveCommand();
-    }
-
-    public void Log(string message)
-    {
-        Debug.Log(gameObject.name + " - " + message);
     }
 }
 

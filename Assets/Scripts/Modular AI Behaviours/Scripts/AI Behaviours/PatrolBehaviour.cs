@@ -2,7 +2,7 @@ using Pathfinding;
 using UnityEditor;
 using UnityEngine;
 
-[CreateAssetMenu(fileName="Patrol Behaviour", menuName="AI Behaviours/Behaviours/New Patrol Behaviour")]
+[System.Serializable]
 public class PatrolBehaviour : AIBehaviour
 {
     private Vector3 initialPosition;

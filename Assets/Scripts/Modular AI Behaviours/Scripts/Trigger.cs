@@ -1,8 +1,7 @@
 using System.Reflection;
 using UnityEngine;
 
-[CreateAssetMenu(fileName="Trigger", menuName="AI Behaviours/New Trigger")]
-public class Trigger : ScriptableObject
+public class Trigger
 {
     private NPC parent;
 
@@ -18,6 +17,8 @@ public class Trigger : ScriptableObject
     public bool setBooleanValue;
 
     public float setFloatValue;
+
+    public Constraint[] constraints;
 
     public void Initialize(NPC parent)
     {
@@ -37,7 +38,7 @@ public class Trigger : ScriptableObject
                 break;
             case Type.METHOD:
                 Debug.Log("Triggering");
-                typeof(NPC).InvokeMember(propertyName, BindingFlags.InvokeMethod, null, parent, null);
+                typeof(NPC).InvokeMember(propertyName, BindingFlags.Public, null, parent, null);
                 break;
         }
     }
