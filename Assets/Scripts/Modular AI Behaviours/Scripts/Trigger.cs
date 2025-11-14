@@ -36,7 +36,7 @@ public class Trigger : ScriptableObject
                 break;
             case Type.METHOD:
                 Debug.Log("Triggering");
-                typeof(NPC).InvokeMember(propertyName, BindingFlags.Public, null, parent, null);
+                typeof(NPC).InvokeMember(propertyName, BindingFlags.InvokeMethod, null, parent, null);
                 break;
         }
     }

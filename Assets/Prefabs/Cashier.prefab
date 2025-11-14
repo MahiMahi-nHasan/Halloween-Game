@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68caf7d418e6c4ec6b5b239cdf60bc63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugLevel: 0
   triggers:
   - trigger: {fileID: 11400000, guid: 8be025111e0a64d5ebb747bdf5981737, type: 2}
     constraints:
@@ -113,7 +114,7 @@ MonoBehaviour:
   seeingDistance: 20
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   id: 0
   nextWaypointDistance: 3
   drawGizmos: 0

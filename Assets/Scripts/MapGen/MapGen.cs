@@ -21,7 +21,7 @@ public class MapGen : MonoBehaviour
 
     public void getDimensions()
     {
-        totalDimensions = totalDimensions;
+        //totalDimensions = totalDimensions;
     }
 
     public GameObject[] GenerateMap()

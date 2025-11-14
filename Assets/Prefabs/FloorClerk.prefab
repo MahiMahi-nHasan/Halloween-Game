@@ -159,6 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68caf7d418e6c4ec6b5b239cdf60bc63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugLevel: 0
   triggers:
   - trigger: {fileID: 11400000, guid: 6eadac49f013b4a11b9fba070d3fa5e2, type: 2}
     constraints:
@@ -178,12 +179,12 @@ MonoBehaviour:
     constraints:
     - {fileID: 11400000, guid: 87c6332f2c9be4eed9f80b817f02b898, type: 2}
   movementBehaviours:
-  - behaviour: {fileID: 11400000, guid: 589de114041fb48ffba4dc0e4b7af164, type: 2}
-    constraints:
-    - {fileID: 11400000, guid: f3ade4d13d3fa40fcb48a265d9b0cfe8, type: 2}
   - behaviour: {fileID: 11400000, guid: 4929d5c9226b549b5a292c49bc529ffa, type: 2}
     constraints:
     - {fileID: 11400000, guid: 90607a51da03e4349870c5b51dc45632, type: 2}
+  - behaviour: {fileID: 11400000, guid: 589de114041fb48ffba4dc0e4b7af164, type: 2}
+    constraints:
+    - {fileID: 11400000, guid: f3ade4d13d3fa40fcb48a265d9b0cfe8, type: 2}
   - behaviour: {fileID: 11400000, guid: 6e0c9833042f24b06977c334035a01cf, type: 2}
     constraints: []
   targetTag: Player

@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName="Chase Behaviour", menuName="AI Behaviours/Behaviours/New Chase Behaviour")]
 public class ChaseBehaviour : AIBehaviour
 {
-    public string targetPropertyName = "_Target";
+    public string targetTag = "Player";
     public string sightPropertyName = "_SeeingTarget";
 
     private Vector3 lastKnownPosition;
@@ -12,7 +12,7 @@ public class ChaseBehaviour : AIBehaviour
     public new void Initialize(GameObject parent)
     {
         base.Initialize(parent);
-        target = (Transform)typeof(NPC).GetProperty(targetPropertyName).GetValue(parent.GetComponent<NPC>());
+        target = GameObject.FindGameObjectWithTag(targetTag).transform;
     }
 
     /*
