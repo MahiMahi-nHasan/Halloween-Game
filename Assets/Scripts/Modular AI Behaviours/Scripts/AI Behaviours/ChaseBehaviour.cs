@@ -8,7 +8,7 @@ public class ChaseBehaviour : AIBehaviour
 
     private Vector3 lastKnownPosition;
 
-    public new void Initialize(GameObject parent)
+    public override void Initialize(GameObject parent)
     {
         base.Initialize(parent);
     }

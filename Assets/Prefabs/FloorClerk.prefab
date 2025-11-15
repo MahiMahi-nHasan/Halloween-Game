@@ -181,9 +181,6 @@ MonoBehaviour:
   movementBehaviours:
   - behaviour: {fileID: 11400000, guid: 6e0c9833042f24b06977c334035a01cf, type: 2}
     constraints: []
-  - behaviour: {fileID: 11400000, guid: 4929d5c9226b549b5a292c49bc529ffa, type: 2}
-    constraints:
-    - {fileID: 11400000, guid: 90607a51da03e4349870c5b51dc45632, type: 2}
   health: 100
   speed: 5
   height: 2

@@ -6,7 +6,7 @@ public class FleeBehaviour : AIBehaviour
     private Transform target;
     [SerializeField] private float pathDistance;
 
-    public new void Initialize(GameObject parent)
+    public override void Initialize(GameObject parent)
     {
         base.Initialize(parent);
         target = GameManager.active.player;

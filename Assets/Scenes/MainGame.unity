@@ -333,7 +333,7 @@ MonoBehaviour:
     constraints: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   chunks: []
   totalDimensions: {x: 7, y: 7}
-  offset: {x: -50, y: 0, z: -50}
+  offset: {x: -25, y: 0, z: -25}
 --- !u!4 &164389213
 Transform:
   m_ObjectHideFlags: 0
@@ -896,7 +896,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   candyPrefab: {fileID: 2985842136572694376, guid: dd2fd68a95e8a4b72b086e06f0609db4, type: 3}
   transformRoot: {fileID: 1259568083}
-  forceMultiplier: 40
+  forceMultiplier: 60
   baseDirection: {x: 0, y: 0.2, z: 1}
   randomizationFactor: 10
   count: 5
@@ -931,8 +931,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 150, y: 0, z: 5.1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 442587434}
   - {fileID: 1408392719}
@@ -2051,7 +2051,7 @@ Transform:
   m_GameObject: {fileID: 2049303620}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 100, y: 0, z: 100}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2071,7 +2071,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   data:
-    dataString: UEsDBBQAAAgIAACYn+uiNXIUNQAAAD4AAAAJACQAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0Bq1YqSy0qzszPU7JSMNEz0jM011FQSi9KLMgoBooYgDilmSkgdnQskFNSWZDql5ibChGoBQBQSwECLQAUAAAICAAAmJ/rojVyFDUAAAA+AAAACQAkAAAAAAAAAAAAAAAAAAAAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsFBgAAAAABAAEAWwAAAIAAAAAAAA==
+    dataString: UEsDBBQAAAgIAACYn+s86UazUgIAAA8FAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVE1z2jAQ/SuMzu2M7YEQemsNIT0QmNBOLr4Ia401yJJHHwGS4b93JdvYdU6W9r3dffthfRIuTQ25VXqtOdsoBuTHhPgz+TbpwWe40KOSe/4BHeeNM1t6Eg2cV2q5Qnvs3YyqwGqe/5RH4ckRGp3khdLVih0hVcYaNBdUGEBIK+u9JZo+J+TSOlzb74f/Tm54ykFa0D0rTmYjHloC08lc0KoG5hX3DsmsC4ynQJRYTcvxynMlBDetFGKvdSg1pbVxWAgSGKdYWhCR4LUEfiwtXqZD521RGLCtLE2vS66xQ01U8ks1bauoOTXK3qlwQUDyGDQ1QTdf8YAWWlXPXdo48ilsyfPTK73m1NhBW4fmZa87Dv05U3GiBwFvJcgXtdbKSYag1c67OgPJchDqXlpaQn7qeY3UkdHVXwcZ94O8heIvqeDVoWXgdS9U3a0KaJzKb1QbtsL0Vq/gr4E/9DhcnxZ44tpYhNps0ks7KKc9laxCw3wlzqZKSwjmVnANkgp73WEYOx7fCBukHSFP1P8obfIW6/Z/5BLMPT+KRtBOne+TMqU6b8CUW2cFl9CL9sAL9ilVUjbbNexJ57Z3uqD5wO3oOPt/rcjjfBE/zBeL+BCx2TyafY/iaTx7eJzOkmkSJ/RAwuJxiXVSsWuEtu3Bock+uMQl696PyVrTOmw60/S85h+VGrScy0Ltcw0gt02Eu3DQmAT/SLZiHBu0B2u5DPMmnxkRKj8By+6BslDp6mI1zfooGan5u7LekpE0vBoZ8eb7Hu80vHM4++RdsBu5/QNQSwMEFAAACAgAAJif68y4QcBtAAAAeAAAAAkAJABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGrVipLLSrOzM9TslIw0TPSMzTXUVBKL0osyCgGihiCOKWZKSB2tJKFuaWhmbmlpWGSQYqpuYGproGhiaGpmYWJqZGJkaFRYpJSLFB9SWVBql9ibipET0BiSUZaZl5KZl66nntRZoo7yGil2FoAUEsBAi0AFAAACAgAAJif6zzpRrNSAgAADwUAAAsAJAAAAAAAAAAAAAAAAAAAAGdyYXBoMC5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAAJif68y4QcBtAAAAeAAAAAkAJAAAAAAAAAAAAAAAnwIAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAgACALgAAABXAwAAAAA=
     upgradeData: 
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 

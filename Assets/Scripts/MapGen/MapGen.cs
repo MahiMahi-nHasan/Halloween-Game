@@ -81,17 +81,6 @@ public class MapGen : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
         
-        AstarData data = AstarPath.active.data;
-        GridGraph gg = data.AddGraph(typeof(GridGraph)) as GridGraph;
-        int width = 250;
-        int depth = 250;
-        float nodeSize = 1;
-        gg.center = new Vector3(100, 0, 100);
-        gg.SetDimensions(width, depth, nodeSize);
-        gg.erodeIterations = 1;
-        gg.collision.use2D = false;
-        gg.collision.type = ColliderType.Capsule;
-        gg.collision.mask = LayerMask.GetMask("Obstacles");
         AstarPath.active.Scan();
     }
 
