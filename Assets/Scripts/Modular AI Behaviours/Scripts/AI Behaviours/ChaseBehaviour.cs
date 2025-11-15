@@ -7,12 +7,10 @@ public class ChaseBehaviour : AIBehaviour
     public string sightPropertyName = "_SeeingTarget";
 
     private Vector3 lastKnownPosition;
-    private Transform target;
 
     public new void Initialize(GameObject parent)
     {
         base.Initialize(parent);
-        target = GameObject.FindGameObjectWithTag(targetTag).transform;
     }
 
     /*
@@ -23,9 +21,9 @@ public class ChaseBehaviour : AIBehaviour
     public override Vector3 SelectTarget()
     {
         Vector3 t_pos = new(
-            target.position.x,
+            GameManager.active.player.position.x,
             parent.transform.position.y,
-            target.position.z
+            GameManager.active.player.position.z
         );
 
         // If the NPC can see the player, using the sight property from the NPC class

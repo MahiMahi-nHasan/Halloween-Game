@@ -12,7 +12,9 @@ public class PatrolBehaviour : AIBehaviour
     // Call base constructor to set constraints
     public new void Initialize(GameObject parent)
     {
+        Debug.Log("Initializing Patrol Behaviour");
         base.Initialize(parent);
+        Debug.Log(parent.transform.position);
         initialPosition = parent.transform.position;
     }
 

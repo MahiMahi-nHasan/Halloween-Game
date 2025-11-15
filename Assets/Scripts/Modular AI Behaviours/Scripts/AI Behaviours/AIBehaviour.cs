@@ -12,6 +12,7 @@ public abstract class AIBehaviour : ScriptableObject
     public float multiplicativeSpeedMultiplier = 1;
     public void Initialize(GameObject parent)
     {
+        Debug.Log("Initializing behaviour");
         this.parent = parent;
     }
     public abstract Vector3 SelectTarget();

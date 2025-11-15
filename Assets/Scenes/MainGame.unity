@@ -1616,6 +1616,7 @@ MonoBehaviour:
   universalSoundEffect: {fileID: 1278373475}
   universalMusic: {fileID: 1412975960}
   endUI: {fileID: 564881818}
+  player: {fileID: 1259568083}
   candy: 0
   restockTimer: 0
   cashierSpawner:

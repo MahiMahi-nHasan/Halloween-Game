@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public AudioSource universalSoundEffect;
     public AudioSource universalMusic;
     public GameObject endUI;
+    public Transform player;
 
     [Header("Game Data")]
 
