@@ -48,6 +48,8 @@ public class Shoot : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             Rigidbody rb = Instantiate(candyPrefab, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
+            // Inherit initial velocity
+            rb.velocity = transformRoot.GetComponent<Rigidbody>().velocity;
             Vector3 dir = Quaternion.Euler(
                 Random.Range(-randomizationFactor, randomizationFactor),
                 Random.Range(-randomizationFactor, randomizationFactor),
