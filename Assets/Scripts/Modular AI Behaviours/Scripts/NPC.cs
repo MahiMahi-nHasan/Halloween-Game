@@ -121,7 +121,7 @@ public class NPC : MonoBehaviour
     */
     private void Start()
     {
-        foreach (Behaviour b in movementBehaviours)
+        foreach (Behaviour b in behaviours)
         {
             b.behaviour.Initialize(gameObject);
 
@@ -179,13 +179,15 @@ public class NPC : MonoBehaviour
 
         // Invoke all applicable triggers
         foreach (ConstrainedTrigger t in triggers)
-            if (Constraint.Evaluate(t.constraints))
+        {
+            bool eval;
+            if (eval = Constraint.Evaluate(t.constraints))
                 t.trigger.Invoke();
-            if (debugLevel >= DebugLevel.EVERYTHING) Log(string.Format("{0} evaluated as {1}", t.trigger.name, eval));
+            if (debugLevel >= DebugLevel.EVERYTHING) Debug.Log(string.Format("{0} evaluated as {1}", t.trigger, eval));
         }
 
         // Check whether behaviour has changed
-        activeBehaviour = GetActiveBehaviour();
+            activeBehaviour = GetActiveBehaviour();
 
         // Return early if no behaviour is selected
         if (activeBehaviour == -1)
