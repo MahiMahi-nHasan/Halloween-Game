@@ -21,6 +21,7 @@ public class Trigger : ScriptableObject
 
     public void Initialize(NPC parent)
     {
+        //Debug.Log("Initializing trigger");
         this.parent = parent;
     }
 

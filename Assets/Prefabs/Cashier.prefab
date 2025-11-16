@@ -29,8 +29,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7602892518709303089}
   m_Father: {fileID: 0}
@@ -107,11 +107,10 @@ MonoBehaviour:
   movementBehaviours:
   - behaviour: {fileID: 11400000, guid: de202cd3c44c042c6abbe3f5aec8df1a, type: 2}
     constraints: []
-  targetTag: Player
   health: 100
   speed: 5
-  height: 0.5
-  seeingDistance: 20
+  height: 2
+  seeingDistance: 50
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 128

@@ -1,18 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Pathfinding;
-
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 
 
 public class MapGen : MonoBehaviour
 {
     public float spacing = 3f;
     [Header("Tile Information")]
-    public Tile[] tiles; 
+    public Tile[] tiles;
     public GameObject[] chunks;
 
     [Header("Map Dimensions")]
@@ -52,9 +47,16 @@ public class MapGen : MonoBehaviour
 
         environmentParent.transform.position += offset;
 
+        // Populate shelves
+        GameObject[] shelfItems = GameManager.active.shelfItems;
+        GameObject[] shelves = GameObject.FindGameObjectsWithTag("Shelf");
+        foreach (GameObject g in shelves)
+            Instantiate(shelfItems[Random.Range(0, shelfItems.Length - 1)], g.transform.position, g.transform.rotation, g.transform);
+
         StartCoroutine(createAStarGraph());
         return chunks;
     }
+    
     public void DeleteMap()
     {
         if (chunks == null || chunks.Length == 0)
@@ -64,14 +66,14 @@ public class MapGen : MonoBehaviour
         {
             if (chunk != null)
             {
-                #if UNITY_EDITOR
+#if UNITY_EDITOR
                 if (!Application.isPlaying)
                     Object.DestroyImmediate(chunk);
                 else
                     Destroy(chunk);
-                #else
+#else
             Destroy(chunk);
-                #endif
+#endif
             }
         }
         chunks = new GameObject[0];
@@ -81,17 +83,6 @@ public class MapGen : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
         
-        AstarData data = AstarPath.active.data;
-        GridGraph gg = data.AddGraph(typeof(GridGraph)) as GridGraph;
-        int width = 250;
-        int depth = 250;
-        float nodeSize = 1;
-        gg.center = new Vector3(100, 0, 100);
-        gg.SetDimensions(width, depth, nodeSize);
-        gg.erodeIterations = 1;
-        gg.collision.use2D = false;
-        gg.collision.type = ColliderType.Capsule;
-        gg.collision.mask = LayerMask.GetMask("Obstacles");
         AstarPath.active.Scan();
     }
 

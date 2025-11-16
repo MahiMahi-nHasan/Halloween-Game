@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f1b349a809db4e85944ef5e97f0d005, type: 3}
-  m_Name: DIST_GT_30
+  m_Name: DIST_GT_80
   m_EditorClassIdentifier: 
   type: 0
   parent: {fileID: 0}
   comparisonType: 2
   boolEvaluationType: 0
   propertyName: _Target
-  compareValue: 30
+  compareValue: 80

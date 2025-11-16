@@ -16,6 +16,10 @@ public class NPC : MonoBehaviour
     }
     public DebugLevel debugLevel = DebugLevel.NONE;
 
+    // Class-level declarations
+
+    [SerializeField] private AudioClip deathSound;
+
     [Header("Behaviours")]
 
     [SerializeField] private ConstrainedTrigger[] triggers;
@@ -28,9 +32,8 @@ public class NPC : MonoBehaviour
     private float timer;
     private readonly System.Random rand = new();
 
-    [Header("NPC")]
+    [Header("Movement and Pathfinding")]
 
-    [SerializeField] private string targetTag;
     private Transform target;
     public Transform _Target
     {
@@ -98,10 +101,7 @@ public class NPC : MonoBehaviour
     private void Awake()
     {
         seeker = GetComponent<Seeker>();
-        if (target == null)
-            target = FindObjectOfType<PlayerController>().transform;
-
-        target = GameObject.FindGameObjectWithTag(targetTag).transform;
+        target = GameManager.active.player;
     }
 
     private void OnEnable()
@@ -120,6 +120,14 @@ public class NPC : MonoBehaviour
     */
     private void Start()
     {
+        foreach (Behaviour b in movementBehaviours)
+        {
+            b.behaviour.Initialize(gameObject);
+
+            foreach (Constraint c in b.constraints)
+                c.Initialize(gameObject);
+        }
+
         foreach (ConstrainedTrigger t in triggers)
         {
             t.trigger.Initialize(this);
@@ -129,13 +137,6 @@ public class NPC : MonoBehaviour
         }
 
         NPCManager = FindObjectOfType<NPCManager>();
-        foreach (Behaviour b in movementBehaviours)
-        {
-            b.behaviour.Initialize(gameObject);
-
-            foreach (Constraint c in b.constraints)
-                c.Initialize(gameObject);
-        }
     }
 
     /*
@@ -158,21 +159,21 @@ public class NPC : MonoBehaviour
         hits obstacles (returns true)
          > ie seeingTarget = !Raycast
         */
+        float dist;
         eyePos = transform.position + Vector3.up * height;
-        targetAtEyeHeight = transform.position + Vector3.up * height;
+        targetAtEyeHeight = target.position + Vector3.up * height;
+
         seeingTarget = !Physics.Raycast(
             eyePos,
-            targetAtEyeHeight,
-            seeingDistance,
+            targetAtEyeHeight - eyePos,
+            seeingDistance > (dist = Vector3.Distance(eyePos, targetAtEyeHeight)) ? dist : seeingDistance,
             obstacleLayer
         );
-        /*
-        Debug.DrawLine(
+        Debug.DrawRay(
         eyePos,
-        target.position,
+        2 * (targetAtEyeHeight - eyePos).normalized,
         seeingTarget ? Color.green : Color.red
         );
-        */
 
 
         // Invoke all applicable triggers
@@ -181,7 +182,7 @@ public class NPC : MonoBehaviour
             bool eval;
             if (eval = Constraint.Evaluate(t.constraints, debugLevel >= DebugLevel.EVERYTHING))
                 t.trigger.Invoke();
-            if (debugLevel > DebugLevel.NONE) Log(string.Format("{0} evaluated as {1}", t.trigger.name, eval));
+            if (debugLevel >= DebugLevel.EVERYTHING) Log(string.Format("{0} evaluated as {1}", t.trigger.name, eval));
         }
 
         // Check whether behaviour has changed
@@ -298,6 +299,9 @@ public class NPC : MonoBehaviour
     {
         // Disable movement
         speed = 0;
+
+        // Play death sound
+        GameManager.active.universalSoundEffect.PlayOneShot(deathSound);
 
         // Despawn NPC
         Despawn();

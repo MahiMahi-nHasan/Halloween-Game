@@ -55,7 +55,7 @@ public class ItemPickup : MonoBehaviour
     private void PickupItem()
     {
         // Candy stolen logic
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 50f); // 20 units radius
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 30f); // 30 units radius
         foreach (var col in hitColliders)
         {
             if (!col.TryGetComponent(out NPC npc)) continue;

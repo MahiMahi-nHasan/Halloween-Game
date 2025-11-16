@@ -3,14 +3,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Flee Behaviour", menuName = "AI Behaviours/Behaviours/New Flee Behaviour")]
 public class FleeBehaviour : AIBehaviour
 {
-    public string targetPropertyName = "_Target";
     private Transform target;
     [SerializeField] private float pathDistance;
 
-    public new void Initialize(GameObject parent)
+    public override void Initialize(GameObject parent)
     {
         base.Initialize(parent);
-        target = (Transform)typeof(NPC).GetProperty(targetPropertyName).GetValue(parent.GetComponent<NPC>());
+        target = GameManager.active.player;
     }
 
     public override Vector3 SelectTarget()

@@ -113,8 +113,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 8, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7514395164830058123}
   m_Father: {fileID: 0}
@@ -159,7 +159,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68caf7d418e6c4ec6b5b239cdf60bc63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugLevel: 0
+  debugLevel: 1
+  deathSound: {fileID: 8300000, guid: 17b80fed22a1bd54fab080d5b3089942, type: 3}
   triggers:
   - trigger: {fileID: 11400000, guid: 6eadac49f013b4a11b9fba070d3fa5e2, type: 2}
     constraints:
@@ -179,19 +180,12 @@ MonoBehaviour:
     constraints:
     - {fileID: 11400000, guid: 87c6332f2c9be4eed9f80b817f02b898, type: 2}
   movementBehaviours:
-  - behaviour: {fileID: 11400000, guid: 4929d5c9226b549b5a292c49bc529ffa, type: 2}
-    constraints:
-    - {fileID: 11400000, guid: 90607a51da03e4349870c5b51dc45632, type: 2}
-  - behaviour: {fileID: 11400000, guid: 589de114041fb48ffba4dc0e4b7af164, type: 2}
-    constraints:
-    - {fileID: 11400000, guid: f3ade4d13d3fa40fcb48a265d9b0cfe8, type: 2}
   - behaviour: {fileID: 11400000, guid: 6e0c9833042f24b06977c334035a01cf, type: 2}
     constraints: []
-  targetTag: Player
   health: 100
   speed: 5
-  height: 1
-  seeingDistance: 10
+  height: 2
+  seeingDistance: 30
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 128
