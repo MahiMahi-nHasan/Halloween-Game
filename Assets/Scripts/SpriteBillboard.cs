@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class SpriteBillboard : MonoBehaviour
 {
     [SerializeField] bool freezeXZAxis = true;
@@ -9,10 +8,17 @@ public class SpriteBillboard : MonoBehaviour
     [SerializeField] float bobAmplitude = 0.1f;
     [SerializeField] float bobFrequency = 1f;
     Vector3 initialPos;
+
+    [SerializeField] float fogDistance = 30;
+    [SerializeField] float fadeDistance = 20;
+    SpriteRenderer rend;
+
     private void Start()
     {
-        initialPos = transform.localPosition;
+        initialPos = transform.position;
+        rend = GetComponent<SpriteRenderer>();
     }
+
     void LateUpdate()
     {
         if (freezeXZAxis)
@@ -22,7 +28,17 @@ public class SpriteBillboard : MonoBehaviour
         if (bobbing)
         {
             float bobOffset = Mathf.Sin(Time.time * bobFrequency) * bobAmplitude;
-            transform.localPosition = initialPos + new Vector3(0f, bobOffset, 0f);
+            transform.position = initialPos + new Vector3(0f, bobOffset, 0f);
         }
+
+        // Fade sprite based on distance
+        float alpha = (fogDistance - Vector3.Distance(Camera.main.transform.position, initialPos)) / fadeDistance + 1;
+        Debug.Log(alpha);
+        rend.color = new Color(
+            rend.color.r,
+            rend.color.g,
+            rend.color.b,
+            alpha
+        );
     }
 }
