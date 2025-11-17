@@ -76,6 +76,8 @@ public class FloorClerk : NPC
     private void Start()
     {
         initPos = transform.position;
+        sawCandyStolen = false;
+        followingCommand = false;
         SelectState();
         StartCoroutine(StartPath());
         checkState = state;

@@ -24,6 +24,7 @@ public class Cashier : NPC
         );
 
         if (seeingTarget && sawCandyStolen) {
+            Debug.Log("Cashier saw player stealing!");
             GameObject[] fcs = GameObject.FindGameObjectsWithTag("FloorClerk");
             fcs[Random.Range(0, fcs.Length)].GetComponent<FloorClerk>().ReceiveCommand();
         }
