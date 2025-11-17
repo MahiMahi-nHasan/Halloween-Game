@@ -28,6 +28,7 @@ public class FloorClerk : NPC
     // Class-level declarations
 
     [SerializeField] private AudioClip deathSound;
+    [SerializeField] private Animator animator;
 
     [Header("Movement and Pathfinding")]
 
@@ -135,6 +136,7 @@ public class FloorClerk : NPC
         {
             Vector3 dir = (path.vectorPath[currentWaypoint] - transform.position).normalized;
             Vector3 movement = speed * Time.deltaTime * dir;
+            animator.SetFloat("speed", movement.magnitude);
             if (debugLevel >= DebugLevel.VERBOSE)
                 Log(string.Format(
                     "Waypoint {0} = {1}\nMovement vector = {2}",

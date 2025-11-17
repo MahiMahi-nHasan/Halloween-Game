@@ -19,7 +19,8 @@ public class SpriteBillboard : MonoBehaviour
         initialPos = transform.position;
         rend = GetComponent<SpriteRenderer>();
         // Randomize sprite from list
-        rend.sprite = sprites[Random.Range(0, sprites.Length)];
+        if (sprites.Length > 0)
+            rend.sprite = sprites[Random.Range(0, sprites.Length)];
     }
 
     void LateUpdate()
@@ -35,7 +36,7 @@ public class SpriteBillboard : MonoBehaviour
         }
 
         // Fade sprite based on distance
-        float alpha = (fogDistance - Vector3.Distance(Camera.main.transform.position, initialPos)) / fadeDistance + 1;
+        float alpha = (fogDistance - Vector3.Distance(Camera.main.transform.position, transform.position)) / fadeDistance + 1;
         rend.color = new Color(
             rend.color.r,
             rend.color.g,
