@@ -15,6 +15,7 @@ public abstract class NPC : MonoBehaviour
     protected Vector3 eyePos;
     protected Vector3 targetAtEyeHeight;
     [SerializeField] protected float height = 2f;
+    [HideInInspector] public Vector3 movement = new();
 
     protected float timer;
     protected readonly System.Random rand = new();

@@ -134,11 +134,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   height: 1
+  movement: {x: 0, y: 0, z: 0}
   debugLevel: 0
   state: 0
   deathSound: {fileID: 8300000, guid: 17b80fed22a1bd54fab080d5b3089942, type: 3}
   animator: {fileID: 1779819106159781914}
   patrolRadius: 10
+  dir: {x: 0, y: 0, z: 0}
   speed: 10
   attackDistance: 5
   attackTime: 2
@@ -285,8 +287,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76e93bc028d53d849a68dff53aa3f952, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  npc: {fileID: 3835246053836469376}
+  threshold: 0
   mainTransform: {fileID: 3604997343074307817}
   an: {fileID: 1779819106159781914}
-  Spriterenderer: {fileID: 629236621215232506}
-  backAngle: 65
-  sideAngle: 155
+  spriteRenderer: {fileID: 629236621215232506}
+  backAngle: 45
+  sideAngle: 135

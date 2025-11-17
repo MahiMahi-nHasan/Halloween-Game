@@ -35,6 +35,7 @@ public class FloorClerk : NPC
     private Vector3 initPos;
     [SerializeField] private float patrolRadius;
     private Vector3 lastKnownPosition;
+    [HideInInspector]public Vector3 dir;
 
     [SerializeField] private float speed = 5f;
 
@@ -133,12 +134,12 @@ public class FloorClerk : NPC
             StartCoroutine(StartPath());
         }
 
+        movement = Vector3.zero;
         // Follow path, using whether path exists as a status variable
         if (path != null)
         {
-            Vector3 dir = (path.vectorPath[currentWaypoint] - transform.position).normalized;
-            Vector3 movement = speed * Time.deltaTime * dir;
-            animator.SetFloat("speed", movement.magnitude);
+            dir = (path.vectorPath[currentWaypoint] - transform.position).normalized;
+            movement = speed * Time.deltaTime * dir;
             if (debugLevel >= DebugLevel.VERBOSE)
                 Log(string.Format(
                     "Waypoint {0} = {1}\nMovement vector = {2}",
@@ -147,6 +148,7 @@ public class FloorClerk : NPC
                     movement
                 ));
             transform.position += movement;
+            transform.rotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.forward, dir, Vector3.up), 0);
 
             // Complete all waypoints which are close enough
             while (true)

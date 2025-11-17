@@ -2,16 +2,29 @@ using UnityEngine;
 
 public class SpriteDirController : MonoBehaviour
 {
+    [SerializeField] NPC npc;
+    [SerializeField] float threshold = 0f;
     [SerializeField] Transform mainTransform;
     [SerializeField] Animator an;
-    [SerializeField] SpriteRenderer Spriterenderer;
+    [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] float backAngle = 65f;
     [SerializeField] float sideAngle = 155f;
-    void LateUpdate()
+    private Vector2 animationDir;
+
+    public void LateUpdate()
     {
+        an.SetFloat("MoveX", animationDir.x);
+        an.SetFloat("MoveY", animationDir.y);
+
+        if (npc.movement.magnitude <= threshold)
+        {
+            animationDir = new(0, 0);
+            return;
+        }
+
         Vector3 camForwardVector = new Vector3(Camera.main.transform.forward.x, 0f, Camera.main.transform.forward.z);
         float signedAngle = Vector3.SignedAngle(mainTransform.forward, camForwardVector, Vector3.up);
-        Vector2 animationDir = new Vector2(0f, -1f);
+        animationDir = new Vector2(0f, -1f);
         float angle = Mathf.Abs(signedAngle);
 
         if (angle < backAngle)
@@ -22,11 +35,11 @@ public class SpriteDirController : MonoBehaviour
         {
             if (signedAngle < 0)
             {
-                Spriterenderer.flipX = true;
+                spriteRenderer.flipX = false;
             }
             else
             {
-                Spriterenderer.flipX = false;
+                spriteRenderer.flipX = true;
             }
 
             animationDir = new Vector2(1f, 0f);
@@ -35,7 +48,5 @@ public class SpriteDirController : MonoBehaviour
         {
             animationDir = new Vector2(0f, 1f);
         }
-        an.SetFloat("MoveX", animationDir.x);
-        an.SetFloat("MoveY", animationDir.y);
     }
 }
