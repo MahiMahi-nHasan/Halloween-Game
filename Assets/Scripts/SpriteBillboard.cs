@@ -3,6 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class SpriteBillboard : MonoBehaviour
 {
+    [SerializeField] private Sprite[] sprites;
     [SerializeField] bool freezeXZAxis = true;
     [SerializeField] bool bobbing = false;
     [SerializeField] float bobAmplitude = 0.1f;
@@ -17,6 +18,8 @@ public class SpriteBillboard : MonoBehaviour
     {
         initialPos = transform.position;
         rend = GetComponent<SpriteRenderer>();
+        // Randomize sprite from list
+        rend.sprite = sprites[Random.Range(0, sprites.Length)];
     }
 
     void LateUpdate()

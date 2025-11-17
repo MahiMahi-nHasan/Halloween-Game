@@ -97,10 +97,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb463eb2f7f41954380d0c839bd5cc01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 21300000, guid: 92012ccf265ea7d4795c6d5b5aec01f7, type: 3}
+  - {fileID: 21300000, guid: 683ad49f658831c4fbee267e3445ad97, type: 3}
+  - {fileID: 21300000, guid: ce6f211ef91304047b0b57828d90d4c6, type: 3}
   freezeXZAxis: 1
   bobbing: 1
   bobAmplitude: 0.15
   bobFrequency: 2
+  fogDistance: 30
+  fadeDistance: 20
 --- !u!1 &5266511745410067544
 GameObject:
   m_ObjectHideFlags: 0
@@ -170,3 +176,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quantity: 1
   pickupSound: {fileID: 8300000, guid: 805751edc7a3d4736a97343e854fe138, type: 3}
+  parent: {fileID: 0}
