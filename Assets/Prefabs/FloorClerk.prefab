@@ -159,12 +159,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68caf7d418e6c4ec6b5b239cdf60bc63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugLevel: 1
+  debugLevel: 0
   deathSound: {fileID: 8300000, guid: 17b80fed22a1bd54fab080d5b3089942, type: 3}
   triggers:
   - trigger: {fileID: 11400000, guid: 6eadac49f013b4a11b9fba070d3fa5e2, type: 2}
     constraints:
     - {fileID: 11400000, guid: a28c76ff3f9cd4f1faff7c79536852e1, type: 2}
+    - {fileID: 11400000, guid: 27b05513f6ded4df88c53dbe50f206c9, type: 2}
   - trigger: {fileID: 11400000, guid: bcf3848c1248d4df0829595aad565ed6, type: 2}
     constraints:
     - {fileID: 11400000, guid: 66489eb4c13ef40e1b307a59e04dc260, type: 2}
@@ -185,7 +186,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 90607a51da03e4349870c5b51dc45632, type: 2}
   - behaviour: {fileID: 11400000, guid: 589de114041fb48ffba4dc0e4b7af164, type: 2}
     constraints:
-    - {fileID: 11400000, guid: 27b05513f6ded4df88c53dbe50f206c9, type: 2}
+    - {fileID: 11400000, guid: f3ade4d13d3fa40fcb48a265d9b0cfe8, type: 2}
   - behaviour: {fileID: 11400000, guid: 6e0c9833042f24b06977c334035a01cf, type: 2}
     constraints: []
   health: 100

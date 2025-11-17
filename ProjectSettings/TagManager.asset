@@ -10,6 +10,8 @@ TagManager:
   - caSpawnpoint
   - Projectile
   - Shelf
+  - FloorClerk
+  - Cashier
   layers:
   - Default
   - TransparentFX

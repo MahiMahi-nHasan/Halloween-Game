@@ -5,6 +5,7 @@ public class ItemSpawnpoint : MonoBehaviour
     public GameObject candyPrefab;
     public float riskDistanceThreshold = 5f;
     public int riskFactor = 1;
+    public bool spawned;
 
     Ray ray;
 
@@ -24,8 +25,12 @@ public class ItemSpawnpoint : MonoBehaviour
 
     public void Spawn()
     {
+        if (spawned) return;
+
         ItemPickup candy = Instantiate(candyPrefab, transform.position, Quaternion.identity).GetComponent<ItemPickup>();
         candy.quantity = riskFactor;
+        candy.parent = this;
+        spawned = true;
     }
 
     public void Update()

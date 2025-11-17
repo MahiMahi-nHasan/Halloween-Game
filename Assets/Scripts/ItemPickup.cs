@@ -11,6 +11,7 @@ public class ItemPickup : MonoBehaviour
     private GameManager gameManager;
 
     private InputActions input;
+    public ItemSpawnpoint parent;
 
     private void Awake()
     {
@@ -71,6 +72,7 @@ public class ItemPickup : MonoBehaviour
         gameManager.candy += quantity;
         GameManager.active.universalSoundEffect.PlayOneShot(pickupSound);
         UIManager.Instance.UpdateCandy(gameManager.candy);
+        parent.spawned = false;
 
         Debug.Log("Candy stolen!");
 

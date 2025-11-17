@@ -98,7 +98,6 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-        // Translational movement
         movement = input.Player.Movement.ReadValue<Vector2>();
         if (movement.magnitude != 0)
         {
@@ -107,7 +106,7 @@ public class PlayerController : MonoBehaviour
                 0,
                 movement.y
             );
-            movementVector = movement.normalized * moveSpeed * Time.deltaTime;
+            movementVector = moveSpeed * Time.deltaTime * movement.normalized;
             isMoving = true;
         }
         else
@@ -118,13 +117,15 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space) && meter != 0 && canRun && isMoving)
         {
-            if (Physics.Raycast(transform.position, movementVector.normalized, movementVector.magnitude * sprintFactor, GameManager.active.obstacleLayers)) return;
             transform.Translate(sprintFactor * movementVector);
+            if (0 < Physics.OverlapSphere(transform.position, 1.5f, GameManager.active.obstacleLayers).Length)
+                transform.Translate(-sprintFactor * movementVector);
         }
         else
         {
-            if (Physics.Raycast(transform.position, movementVector.normalized, movementVector.magnitude, GameManager.active.obstacleLayers)) return;
             transform.Translate(movementVector);
+            if (0 < Physics.OverlapSphere(transform.position, 1.5f, GameManager.active.obstacleLayers).Length)
+                transform.Translate(-movementVector);
         }
     }
 
