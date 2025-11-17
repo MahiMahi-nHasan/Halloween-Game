@@ -32,7 +32,6 @@ public class MapGenEditor : Editor
             EditorGUILayout.LabelField($"Tile {i + 1}", EditorStyles.boldLabel);
 
             mapGenerator.tiles[i].prefab = (GameObject)EditorGUILayout.ObjectField("Prefab", mapGenerator.tiles[i].prefab, typeof(GameObject), false);
-            mapGenerator.tiles[i].canRotate = EditorGUILayout.Toggle("Can Rotate", mapGenerator.tiles[i].canRotate);
             int totalMapSize = mapGenerator.totalDimensions.x * mapGenerator.totalDimensions.y;
             if (mapGenerator.tiles[i].constraints == null || mapGenerator.tiles[i].constraints.Length != totalMapSize)
             {

@@ -34,14 +34,10 @@ public class MapGen : MonoBehaviour
             for (int x = 0; x < totalDimensions.x; x++)
             {
                 int index = z * totalDimensions.x + x;
-                Tile selected = SelectRandomTileForPosition(x, z);
-                if (selected.prefab != null)
+                Tile selectedTile = SelectRandomTileForPosition(x, z);
+                if (selectedTile.prefab != null)
                 {
-                    GameObject chunk = Instantiate(
-                        selected.prefab,
-                        new Vector3(x * spacing, 0, z * spacing),
-                        Quaternion.identity//Quaternion.Euler(0, selected.canRotate ? 90 * Random.Range(0, 4) : 0, 0)
-                    );
+                    GameObject chunk = Instantiate(selectedTile.prefab, new Vector3(x * spacing, 0, z * spacing), Quaternion.identity);
                     chunk.transform.SetParent(environmentParent.transform);
                     chunks[index] = chunk;
 
@@ -52,18 +48,15 @@ public class MapGen : MonoBehaviour
         environmentParent.transform.position += offset;
 
         // Populate shelves
-        if (Application.isPlaying)
-        {
-            GameObject[] shelfItems = GameManager.active.shelfItems;
-            GameObject[] shelves = GameObject.FindGameObjectsWithTag("Shelf");
-            foreach (GameObject g in shelves)
-                Instantiate(shelfItems[Random.Range(0, shelfItems.Length)], g.transform.position, g.transform.rotation, g.transform);
-        }
+        GameObject[] shelfItems = GameManager.active.shelfItems;
+        GameObject[] shelves = GameObject.FindGameObjectsWithTag("Shelf");
+        foreach (GameObject g in shelves)
+            Instantiate(shelfItems[Random.Range(0, shelfItems.Length)], g.transform.position, g.transform.rotation, g.transform);
 
         StartCoroutine(createAStarGraph());
         return chunks;
     }
-
+    
     public void DeleteMap()
     {
         if (chunks == null || chunks.Length == 0)
@@ -110,7 +103,7 @@ public class MapGen : MonoBehaviour
         if (availableTiles.Count > 0)
         {
             int randomIndex = Random.Range(0, availableTiles.Count);
-            return tiles[randomIndex];
+            return availableTiles[randomIndex];
         }
 
         return new Tile();
