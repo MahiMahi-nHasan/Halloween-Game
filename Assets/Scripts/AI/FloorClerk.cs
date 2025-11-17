@@ -37,7 +37,6 @@ public class FloorClerk : NPC
 
     [SerializeField] private float speed = 5f;
 
-    private bool attacking = false;
     [SerializeField] private float attackDistance = 5f;
     [SerializeField] private float attackTime = 2f;
     private float attackCooldown = 0f;
@@ -49,6 +48,7 @@ public class FloorClerk : NPC
     [SerializeField] private float nextWaypointDistance = 3;
     [SerializeField] private float pathfindingInterval;
     [SerializeField] private float continuousGenerationInterval;
+    private float pathfindingCooldown;
 
     [SerializeField] private bool drawGizmos = false;
 
@@ -86,6 +86,9 @@ public class FloorClerk : NPC
     */
     private void Update()
     {
+        timer += Time.deltaTime;
+        pathfindingCooldown += Time.deltaTime;
+
         if (attackCooldown > 0f)
             attackCooldown -= Time.deltaTime;
         /*
@@ -97,12 +100,12 @@ public class FloorClerk : NPC
         float dist;
         eyePos = transform.position + Vector3.up * height;
         targetAtEyeHeight = target.position + Vector3.up * height;
-        seeingTarget = !Physics.Raycast(
+        seeingTarget = seeingDistance > (dist = Vector3.Distance(eyePos, targetAtEyeHeight)) ? !Physics.Raycast(
             eyePos,
-            targetAtEyeHeight - eyePos,
-            seeingDistance > (dist = Vector3.Distance(eyePos, targetAtEyeHeight)) ? dist : seeingDistance,
+            (targetAtEyeHeight - eyePos).normalized,
+            dist,
             obstacleLayer
-        );
+        ) : false;
         Debug.DrawRay(
         eyePos,
         2 * (targetAtEyeHeight - eyePos).normalized,
@@ -119,11 +122,11 @@ public class FloorClerk : NPC
             StartCoroutine(StartPath());
             checkState = state;
         }
-
-        timer += Time.deltaTime;
+        
         // If chasing and enough time has passed, update the path to reflect the new player position
-        if (state == State.CHASE && timer > continuousGenerationInterval) {
-            timer -= continuousGenerationInterval;
+        if (state == State.CHASE && pathfindingCooldown > continuousGenerationInterval)
+        {
+            pathfindingCooldown = 0;
             StartCoroutine(StartPath());
         }
 
@@ -150,16 +153,11 @@ public class FloorClerk : NPC
                         currentWaypoint++;
                     else
                     {
-                        if (debugLevel >= DebugLevel.VERBOSE) Log("Finished path - generating new path");
-                        StartCoroutine(StartPath());
+                        OnEndpointReached();
                         break;
                     }
                 else break;
             }
-        }
-        if (attacking && attackCooldown <= 0f)
-        {
-            Attack();
         }
     }
 
@@ -180,23 +178,39 @@ public class FloorClerk : NPC
             yield return new WaitForSeconds(continuousGenerationInterval);
             StartCoroutine(StartPath());
         }
+
+        yield break;
     }
 
-    private State SelectState() {
+    private void OnEndpointReached()
+    {
+        if (debugLevel >= DebugLevel.VERBOSE) Log("Finished path - generating new path");
+        if (state != State.CHASE)
+        {
+            sawCandyStolen = false;
+            followingCommand = false;
+        }
+        StartCoroutine(StartPath());
+    }
+
+    private State SelectState()
+    {
         // If target is chasing and within attack range
         if (seeingTarget && sawCandyStolen && Vector3.Distance(target.position, transform.position) < attackDistance)
             return State.ATTACK;
-        
+
         // Select CHASE if NPC can see the target and saw candy stolen
         // Set followingCommand to true in case the NPC loses sight of the target so it will
         // continue to the last known position
-        if (seeingTarget && sawCandyStolen) {
+        if (seeingTarget && sawCandyStolen)
+        {
             followingCommand = true;
             return State.CHASE;
         }
 
         // Select COMMAND if the NPC is supposed to be following a command
-        if (followingCommand) {
+        if (followingCommand)
+        {
             return State.COMMAND;
         }
 
@@ -227,7 +241,6 @@ public class FloorClerk : NPC
 
         path = p;
         currentWaypoint = 0;        // Reset to avoid IndexOutOfBounds errors
-        followingCommand = false;   // Reset so NPC returns to patrolling
     }
 
     private void OnDrawGizmos()
@@ -287,13 +300,7 @@ public class FloorClerk : NPC
 
         SelectState();
         StartCoroutine(StartPath(delay: false));
-    }
-
-    public void SendRandomCommand()
-    {
-        if (debugLevel > DebugLevel.NONE) Log("Sending Command");
-        GameObject[] temp;
-        (temp = GameManager.active.floorClerkSpawner.GetAllSpawnedEntities())[Random.Range(0, temp.Length)].GetComponent<FloorClerk>().ReceiveCommand();
+        currentWaypoint = 0;
     }
 
     public void Log(string message)

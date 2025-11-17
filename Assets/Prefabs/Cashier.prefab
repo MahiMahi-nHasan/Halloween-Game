@@ -212,8 +212,8 @@ MonoBehaviour:
   id: 0
   sawCandyStolen: 0
   followingCommand: 0
-  seeingDistance: 20
+  seeingDistance: 100
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 128
-  height: 2
+  height: 1

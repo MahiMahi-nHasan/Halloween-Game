@@ -18,7 +18,7 @@ public class CappedRandomSpawner : EntitySpawner
         if (roll < chance)
         {
             Vector3 pos = locations[Random.Range(0, locations.Length)];
-            GameObject go = Object.Instantiate(prefab, pos, Quaternion.identity);
+            GameObject go = Object.Instantiate(prefab, pos + Vector3.up * 0.1f, Quaternion.identity);
             int id = go.GetInstanceID();
             go.name = id.ToString();
             if (go.TryGetComponent(out NPC npc))

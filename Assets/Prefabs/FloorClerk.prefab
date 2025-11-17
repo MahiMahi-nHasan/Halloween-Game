@@ -212,19 +212,19 @@ MonoBehaviour:
   id: 0
   sawCandyStolen: 1
   followingCommand: 1
-  seeingDistance: 10
+  seeingDistance: 100
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 128
-  height: 2
+  height: 1
   debugLevel: 0
   state: 0
   deathSound: {fileID: 8300000, guid: 17b80fed22a1bd54fab080d5b3089942, type: 3}
   patrolRadius: 10
-  speed: 5
+  speed: 10
   attackDistance: 5
   attackTime: 2
   nextWaypointDistance: 3
   pathfindingInterval: 1.5
-  continuousGenerationInterval: 0.2
+  continuousGenerationInterval: 0.5
   drawGizmos: 0

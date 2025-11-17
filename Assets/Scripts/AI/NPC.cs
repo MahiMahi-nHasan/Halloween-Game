@@ -5,9 +5,9 @@ public abstract class NPC : MonoBehaviour
     public EntitySpawner parent;
     public int id;
 
-    public bool sawCandyStolen;
-    public bool followingCommand;
-    protected bool seeingTarget;
+    public bool sawCandyStolen = false;
+    public bool followingCommand = false;
+    protected bool seeingTarget = false;
     [SerializeField] protected float seeingDistance = 10;
     [SerializeField] protected LayerMask obstacleLayer;
     
