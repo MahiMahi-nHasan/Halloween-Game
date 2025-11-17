@@ -101,11 +101,11 @@ public class GameManager : MonoBehaviour
                 spawn.GetComponent<ItemSpawnpoint>().Spawn();
             foreach (GameObject npc in floorClerkSpawner.GetAllSpawnedEntities())
             {
-                npc.GetComponent<NPC>()._SawCandyStolen = false;
-                npc.GetComponent<NPC>()._FollowingCommand = false;
+                npc.GetComponent<NPC>().sawCandyStolen = false;
+                npc.GetComponent<NPC>().followingCommand = false;
             }
             foreach (GameObject npc in cashierSpawner.GetAllSpawnedEntities())
-                npc.GetComponent<NPC>()._SawCandyStolen = false;
+                npc.GetComponent<NPC>().sawCandyStolen = false;
         }
 
         restockTimer += Time.deltaTime;

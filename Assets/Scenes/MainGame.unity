@@ -1923,12 +1923,12 @@ MonoBehaviour:
     locations: []
     continuous: 0
     mode: 1
-    prefab: {fileID: 5418546492239575932, guid: 1092af39563d444dd92938a024256a89, type: 3}
+    prefab: {fileID: 3690932757004893026, guid: 1092af39563d444dd92938a024256a89, type: 3}
     count: 1
   floorClerkSpawner:
     locations: []
     continuous: 1
-    prefab: {fileID: 2116179474185437008, guid: f9eebadef97c2144898ef9aa5cfb3f08, type: 3}
+    prefab: {fileID: 3985114821680270526, guid: f9eebadef97c2144898ef9aa5cfb3f08, type: 3}
     chance: 0.01
     max: 10
 --- !u!1 &1490056527

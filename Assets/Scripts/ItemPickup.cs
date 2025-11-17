@@ -64,7 +64,7 @@ public class ItemPickup : MonoBehaviour
             if (!Physics.Raycast(transform.position, col.transform.position - transform.position, Vector3.Distance(transform.position, col.transform.position), GameManager.active.obstacleLayers))
             {
                 Debug.Log("NPC saw candy stolen");
-                typeof(NPC).GetProperty("_SawCandyStolen").SetValue(npc, true);
+                npc.sawCandyStolen = true;
             }
         }
 
