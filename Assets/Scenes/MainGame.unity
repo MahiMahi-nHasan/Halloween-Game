@@ -1930,7 +1930,7 @@ MonoBehaviour:
     continuous: 1
     prefab: {fileID: 2116179474185437008, guid: f9eebadef97c2144898ef9aa5cfb3f08, type: 3}
     chance: 0.01
-    max: 5
+    max: 10
 --- !u!1 &1490056527
 GameObject:
   m_ObjectHideFlags: 0

@@ -33,7 +33,6 @@ public class SpriteBillboard : MonoBehaviour
 
         // Fade sprite based on distance
         float alpha = (fogDistance - Vector3.Distance(Camera.main.transform.position, initialPos)) / fadeDistance + 1;
-        Debug.Log(alpha);
         rend.color = new Color(
             rend.color.r,
             rend.color.g,
