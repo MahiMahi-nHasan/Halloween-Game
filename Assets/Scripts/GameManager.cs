@@ -50,6 +50,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1;
+        
         mapGenerator.GenerateMap();
 
         GameObject[] temp;
@@ -118,6 +120,8 @@ public class GameManager : MonoBehaviour
     public void OnWin()
     {
         Time.timeScale = 0;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         universalMusic.Stop();
         endUI.GetComponent<EndUI>().UpdateUI();
         endUI.SetActive(true);
@@ -126,6 +130,8 @@ public class GameManager : MonoBehaviour
     public void OnSleep()
     {
         Time.timeScale = 0;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         universalMusic.Stop();
         sleepUI.SetActive(true);
     }

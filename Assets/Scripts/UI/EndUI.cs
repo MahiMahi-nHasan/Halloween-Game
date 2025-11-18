@@ -1,6 +1,4 @@
 using TMPro;
-using UnityEditor;
-using static UnityEditor.EditorGUILayout;
 using UnityEngine;
 
 public class EndUI : MonoBehaviour

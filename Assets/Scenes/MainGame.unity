@@ -2427,7 +2427,7 @@ MonoBehaviour:
   sprintFactor: 1.5
   staminaBar: {fileID: 1769852996}
   cam: {fileID: 1408392716}
-  cameraSensitivity: 2
+  cameraSensitivity: 1
   maxHealth: 3
   hitSound: {fileID: 8300000, guid: 72a5b522098074c54b60fd4df47f2e81, type: 3}
   maxStamina: 200
