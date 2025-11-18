@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public AudioClip[] music;
     private int currentMusicIdx = -1;
     public GameObject endUI;
+    public GameObject sleepUI;
     public Transform player;
     public GameObject[] shelfItems;
 
@@ -114,11 +115,18 @@ public class GameManager : MonoBehaviour
             floorClerkSpawner.TrySpawn();
     }
 
-    public void EndGame()
+    public void OnWin()
     {
         Time.timeScale = 0;
         universalMusic.Stop();
         endUI.GetComponent<EndUI>().UpdateUI();
         endUI.SetActive(true);
+    }
+
+    public void OnSleep()
+    {
+        Time.timeScale = 0;
+        universalMusic.Stop();
+        sleepUI.SetActive(true);
     }
 }

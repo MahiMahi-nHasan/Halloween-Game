@@ -21,7 +21,7 @@ public class ExitDoor : MonoBehaviour
     void Update()
     {
         if (playerInRange && input.Player.Pickup.WasPressedThisFrame())
-            GameManager.active.EndGame();
+            GameManager.active.OnWin();
     }
 
     void OnTriggerEnter(Collider other)

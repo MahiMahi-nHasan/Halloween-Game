@@ -141,7 +141,7 @@ public class PlayerController : MonoBehaviour
         UIManager.Instance.UpdateHealth(health);
         if (health < 0)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            GameManager.active.OnSleep();
         }
 
         GameManager.active.universalSoundEffect.PlayOneShot(hitSound);
