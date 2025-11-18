@@ -144,6 +144,6 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
-        GameManager.active.universalSoundEffect.Play();
+        GameManager.active.universalSoundEffect.PlayOneShot(hitSound);
     }
 }

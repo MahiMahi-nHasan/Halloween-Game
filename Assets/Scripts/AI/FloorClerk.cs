@@ -30,6 +30,8 @@ public class FloorClerk : NPC
     [SerializeField] private AudioClip deathSound;
     [SerializeField] private Animator animator;
 
+    private Cashier assigned;
+
     [Header("Movement and Pathfinding")]
 
     private Vector3 initPos;
@@ -82,6 +84,9 @@ public class FloorClerk : NPC
         SelectState();
         StartCoroutine(StartPath());
         checkState = state;
+
+        GameObject obj = GameManager.active.cashierSpawner.GetRandomSpawnedEntity();
+        (assigned = obj.GetComponent<Cashier>()).Assign(this);
     }
 
     /*
@@ -286,6 +291,8 @@ public class FloorClerk : NPC
 
     private void Despawn()
     {
+        assigned.Unassign(this);
+        
         if (parent != null)
             parent.Despawn(id);
         else

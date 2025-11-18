@@ -141,12 +141,12 @@ MonoBehaviour:
   animator: {fileID: 1779819106159781914}
   patrolRadius: 10
   dir: {x: 0, y: 0, z: 0}
-  speed: 10
+  speed: 13
   attackDistance: 5
   attackTime: 2
   nextWaypointDistance: 3
   pathfindingInterval: 1.5
-  continuousGenerationInterval: 0.5
+  continuousGenerationInterval: 1
   drawGizmos: 0
 --- !u!1 &4504619786151839786
 GameObject:

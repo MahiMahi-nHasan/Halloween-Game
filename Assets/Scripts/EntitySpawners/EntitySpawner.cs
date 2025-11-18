@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public abstract class EntitySpawner
@@ -17,5 +18,10 @@ public abstract class EntitySpawner
     public GameObject[] GetAllSpawnedEntities()
     {
         return new List<GameObject>(spawnedEntities.Values).ToArray();
+    }
+
+    public GameObject GetRandomSpawnedEntity()
+    {
+        return spawnedEntities.ElementAt(Random.Range(0, spawnedEntities.Count)).Value;
     }
 }
